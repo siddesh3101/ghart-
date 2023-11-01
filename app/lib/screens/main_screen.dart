@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_hackathon/screens/arvr/ag_explore_screen.dart';
 import 'package:flutter_hackathon/screens/arvr/ag_home_screen.dart';
+import 'package:flutter_hackathon/screens/arvr/panorama_view.dart';
 import 'package:flutter_hackathon/screens/arvr/products_list_screen.dart';
 import 'package:flutter_hackathon/screens/home_screen.dart';
 import 'package:flutter_hackathon/screens/my_events_screen.dart';
@@ -98,7 +99,15 @@ class _MainPageState extends State<MainPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/cp');
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => PanoramaPage(
+                      images: [
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/1.jpg?alt=media&token=50bef1d0-a0db-493c-8900-58335b50b122',
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/2.jpg?alt=media&token=03e5406c-6b10-4d24-a7af-d03484ba6691',
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/3.jpg?alt=media&token=02c63c67-a914-44fa-a3a5-d925450b39a0'
+                      ],
+                      labels: ['Entrance', 'Point 1', 'Point 2'],
+                    )));
           },
           backgroundColor: MyColors.primaryColor,
           child: SvgPicture.asset(

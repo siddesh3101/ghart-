@@ -62,10 +62,17 @@ dependencies:
   model_viewer_plus: ^1.7.0
   flutter_rating_bar: ^4.0.1
   android_intent_plus: ^4.0.3
+  panorama: ^0.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  motion_sensors:
+    git:
+      url: https://github.com/zesage/motion_sensors
+      ref: master
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
