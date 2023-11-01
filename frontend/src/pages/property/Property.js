@@ -11,6 +11,9 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Maps from "../../components/Maps";
+import GoogleMapReact from "google-map-react";
+
 function Property() {
   const propertyData = {
     name: "Sample Property",
@@ -86,26 +89,37 @@ function Property() {
             })}
           </div>
         </div>
-        <div className="images-wrapper">
-          <Swiper
-            spaceBetween={30}
-            pagination={{
-              clickable: true,
-            }}
-            modules={[Pagination, Autoplay]}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            loop={true}
+        <div className="flex items-center gap-8">
+          <div className="images-wrapper w-[72.5%]">
+            <Swiper
+              spaceBetween={30}
+              pagination={{
+                clickable: true,
+              }}
+              modules={[Pagination, Autoplay]}
+              autoplay={{ delay: 2500, disableOnInteraction: false }}
+              loop={true}
+            >
+              {propertyData.images.map((img) => {
+                return (
+                  <SwiperSlide>
+                    <div style={{ width: "100%", height: "40%" }}>
+                      <img
+                        src={img}
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+          <div
+            className="property-maps-wrapper border-gray border-2 border-solid rounded-xl"
+            style={{ width: "100%", height: "85vh" }}
           >
-            {propertyData.images.map((img) => {
-              return (
-                <SwiperSlide>
-                  <div style={{ width: "72%", height: "40%" }}>
-                    <img src={img} style={{ width: "100%", height: "100%" }} />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+            <Maps />
+          </div>
         </div>
         <div className="content-wrapper flex gap-8">
           <div className="lhs-content  w-[92%] flex flex-col gap-8">

@@ -33,11 +33,11 @@ function Navbar(props) {
   }
 
   const navbarData = [
-    { name: "Home", link: "/" },
-    { name: "Rent", link: "/hmpprograms" },
-    { name: "Buy", link: "/hmpprograms" },
-    { name: "Sell", link: "/aboutus" },
+    { name: "Rent", link: "/rent" },
+    { name: "Buy", link: "/buy" },
+    { name: "Sell", link: "/sell" },
     { name: "Design", link: "/design" },
+    { name: "Maps", link: "/" },
   ];
   return (
     <nav className="landing-navbar navbarAnimation">
