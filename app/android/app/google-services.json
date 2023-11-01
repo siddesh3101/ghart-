@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717938000887",
+    "project_id": "apnaghar-ef0ca",
+    "storage_bucket": "apnaghar-ef0ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717938000887:android:0a32f1b239a1556e5b64f2",
+        "android_client_info": {
+          "package_name": "com.example.apna_ghar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY2Wurf2iTgym4wgDVqD6XWxGxDont2fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
