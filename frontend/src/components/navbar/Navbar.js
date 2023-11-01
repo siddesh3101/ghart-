@@ -11,14 +11,6 @@ function Navbar(props) {
   const navigate = useNavigate();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const location = useLocation();
-  useEffect(() => {
-    // if (window.location.pathname === "/") {
-    //   document.getElementById("home").style.color = "var(--HMPBlue)";
-    // }
-    // if (window.location.pathname === "/hmpprograms") {
-    //   document.getElementById("hmpprograms").style.color = "var(---HMPBlue)";
-    // }
-  }, [location]);
 
   function animate() {
     gsap.from(".navbarAnimation", {
@@ -36,11 +28,11 @@ function Navbar(props) {
   }
 
   const navbarData = [
-    { name: "Rent", link: "/rent" },
-    { name: "Buy", link: "/buy" },
-    { name: "Sell", link: "/sell" },
-    { name: "Design", link: "/design" },
-    { name: "Maps", link: "/map" },
+    { name: "Rent", link: "/rent", id: "rent" },
+    { name: "Buy", link: "/buy", id: "buy" },
+    { name: "Sell", link: "/sell", id: "sell" },
+    { name: "Design", link: "/design", id: "design" },
+    { name: "Maps", link: "/map", id: "map" },
   ];
   const { user } = useAuthContext();
   const { logout } = useLogout();
@@ -54,7 +46,15 @@ function Navbar(props) {
         <ul>
           {navbarData.map((item, index) => {
             return (
-              <li key={index}>
+              <li
+                key={index}
+                id="id"
+                style={
+                  location.pathname.split("/")[1] == item.id
+                    ? { color: "var(--blue)" }
+                    : {}
+                }
+              >
                 <Link
                   to={item.link}
                   id={item.name.toLowerCase()}
@@ -89,7 +89,7 @@ function Navbar(props) {
             <div className="flex navbar-buttons items-center">
               <li className="flex items-center gap-4">
                 <FaRegUserCircle style={{ width: "25px", height: "25px" }} />
-                <p>{user.name.split(" ")[0]}</p>
+                <p>{user?.name.split(" ")[0]}</p>
               </li>
               {/* <li>
                 <button onClick={() => logout()} className="btn-primary">

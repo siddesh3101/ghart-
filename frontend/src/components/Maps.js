@@ -2,7 +2,7 @@ import React from "react";
 import Map from "google-map-react";
 import Marker from "google-map-react";
 
-function Maps({ lat, long, type }) {
+function Maps({ lat, lng, type }) {
   const style1 = [
     {
       featureType: "all",
