@@ -43,7 +43,7 @@ function Navbar(props) {
     <nav className="landing-navbar navbarAnimation">
       <div className="navbar-logo navbarAnimation flex justify-center items-center">
         <img src={HMPLogo} onClick={() => navigate("/")} />
-        <h1 className="font-bold text-sm">APNAGHAR</h1>
+        <h1 className="font-bold text-sm">APNA GHAR</h1>
       </div>
       <div className={isNavExpanded ? "navbar-menu expanded" : "navbar-menu "}>
         <ul>
