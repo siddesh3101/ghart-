@@ -14,7 +14,9 @@ import house1 from "../../assets/house1.jpg";
 import PropertyCard from "../../components/PropertyCard";
 import Section2Img from "../../assets/s2.png";
 import { Link } from "react-router-dom";
+import { usePropertyContext } from "../../context/PropertiesContext";
 function Slider1() {
+  const { data } = usePropertyContext();
   const Slider1Data = [
     {
       image: house1,

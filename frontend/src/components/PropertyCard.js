@@ -17,7 +17,11 @@ function PropertyCard({ image, type, name, place, price, features, style }) {
         <div className="propertycard-line" />
         <div className="feature-box-wrapper">
           {features.map((feature, index) => {
-            return <div className="feature-box">{feature}</div>;
+            return (
+              <div className="feature-box" key={index}>
+                {feature}
+              </div>
+            );
           })}
         </div>
       </div>

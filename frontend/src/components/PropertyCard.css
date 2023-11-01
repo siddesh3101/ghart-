@@ -105,3 +105,12 @@
   background-color: var(--black) !important;
   color: var(--white) !important;
 }
+
+.react-datepicker__view-calendar-icon input {
+  padding: 6px 30px 6px 35px !important;
+}
+
+.visit-type-selected {
+  border: 1.5px solid var(--blue) !important;
+  color: var(--blue) !important;
+}
