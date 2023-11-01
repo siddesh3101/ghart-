@@ -5,11 +5,12 @@ import Threejs from "./pages/threejs/Threejs";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
+import Login from "./pages/Login";
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<div>Login</div>} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/signup" element={<div>Signup</div>} />
         <Route
           path="/three"

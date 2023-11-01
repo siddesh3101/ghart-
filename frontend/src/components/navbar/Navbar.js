@@ -4,17 +4,20 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import HMPLogo from "../../assets/logo.png";
 import "./Navbar.css";
 import gsap from "gsap";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import useLogout from "../../hooks/useLogout";
+import { FaRegUserCircle } from "react-icons/fa";
 function Navbar(props) {
   const navigate = useNavigate();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      document.getElementById("home").style.color = "var(--HMPBlue)";
-    }
-    if (window.location.pathname === "/hmpprograms") {
-      document.getElementById("hmpprograms").style.color = "var(---HMPBlue)";
-    }
+    // if (window.location.pathname === "/") {
+    //   document.getElementById("home").style.color = "var(--HMPBlue)";
+    // }
+    // if (window.location.pathname === "/hmpprograms") {
+    //   document.getElementById("hmpprograms").style.color = "var(---HMPBlue)";
+    // }
   }, [location]);
 
   function animate() {
@@ -37,8 +40,10 @@ function Navbar(props) {
     { name: "Buy", link: "/buy" },
     { name: "Sell", link: "/sell" },
     { name: "Design", link: "/design" },
-    { name: "Maps", link: "/" },
+    { name: "Maps", link: "/map" },
   ];
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
   return (
     <nav className="landing-navbar navbarAnimation">
       <div className="navbar-logo navbarAnimation flex justify-center items-center">
@@ -60,24 +65,39 @@ function Navbar(props) {
               </li>
             );
           })}
-          <div className="flex navbar-buttons">
-            <li>
-              <button
-                onClick={() => navigate("/login")}
-                className="btn-secondary"
-              >
-                Login
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => navigate("/login")}
-                className="btn-primary"
-              >
-                Sign up
-              </button>
-            </li>
-          </div>
+          {!user && (
+            <div className="flex navbar-buttons">
+              <li>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="btn-secondary"
+                >
+                  Login
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigate("/login")}
+                  className="btn-primary"
+                >
+                  Sign up
+                </button>
+              </li>
+            </div>
+          )}
+          {user && (
+            <div className="flex navbar-buttons items-center">
+              <li className="flex items-center gap-4">
+                <FaRegUserCircle style={{ width: "25px", height: "25px" }} />
+                <p>{user.name.split(" ")[0]}</p>
+              </li>
+              {/* <li>
+                <button onClick={() => logout()} className="btn-primary">
+                  Logout
+                </button>
+              </li> */}
+            </div>
+          )}
         </ul>
       </div>
       <button className="hamburger" onClick={handleClick}>

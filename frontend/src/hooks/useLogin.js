@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function useLogin() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
-
+    console.log(email, password);
     const response = await axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         email: email,
         password: password,
       })
@@ -21,11 +23,15 @@ function useLogin() {
         setIsLoading(false);
       });
     const json = await response.data;
-
-    if (json) {
-      localStorage.setItem("user", JSON.stringify(json));
-      dispatch({ type: "LOGIN", payload: json });
+    if (json && json.status != toString(200)) {
+      localStorage.setItem("user", JSON.stringify(json.data));
+      dispatch({ type: "LOGIN", payload: json.data });
       setIsLoading(false);
+      //refresh the window
+      navigate("/");
+      // window.location.reload();
+    } else {
+      alert("Invalid Credentials");
     }
   };
   return { login, isLoading, error };

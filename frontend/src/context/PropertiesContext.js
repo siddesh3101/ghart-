@@ -17,20 +17,21 @@ export function PropertyContextProvider({ children }) {
     data: null,
   });
   async function fetchDetails() {
-    const url = ``;
-    const data = await axios.post(url);
+    const url = `${process.env.REACT_APP_BACKEND_URL}/getProperty`;
+    const data = await axios.get(url);
     if (data) {
+      const store = data?.data;
       dispatch({
         type: "LOAD",
         payload: {
-          data,
+          data: store,
         },
       });
     }
   }
   useEffect(() => {
     fetchDetails();
-  }, [state]);
+  }, []);
   return (
     <PropertyContext.Provider value={{ ...state, dispatch }}>
       {children}
