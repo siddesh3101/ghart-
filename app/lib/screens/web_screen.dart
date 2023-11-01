@@ -19,7 +19,8 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
 
 class WebViewExample extends StatefulWidget {
-  const WebViewExample({super.key});
+  final String url;
+  const WebViewExample({super.key, required this.url});
 
   @override
   State<WebViewExample> createState() => _WebViewExampleState();
@@ -27,6 +28,8 @@ class WebViewExample extends StatefulWidget {
 
 class _WebViewExampleState extends State<WebViewExample> {
   late final WebViewController _controller;
+
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -57,11 +60,20 @@ class _WebViewExampleState extends State<WebViewExample> {
           },
           onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
+            setState(() {
+              isLoading = true;
+            });
           },
           onPageFinished: (String url) {
             debugPrint('Page finished loading: $url');
+            setState(() {
+              isLoading = false;
+            });
           },
           onWebResourceError: (WebResourceError error) {
+            setState(() {
+              isLoading = false;
+            });
             debugPrint('''
 Page resource error:
   code: ${error.errorCode}
@@ -91,7 +103,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('https://surajchavan19.github.io/maps12'));
+      ..loadRequest(Uri.parse(widget.url));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
@@ -109,7 +121,14 @@ Page resource error:
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: WebViewWidget(controller: _controller),
+        body: Stack(
+          children: [
+            WebViewWidget(controller: _controller),
+            (isLoading
+                ? Center(child: CircularProgressIndicator())
+                : Container())
+          ],
+        ),
       ),
     );
   }
