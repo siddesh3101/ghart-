@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_hackathon/screens/arvr/ag_explore_screen.dart';
 import 'package:flutter_hackathon/screens/arvr/ag_home_screen.dart';
+import 'package:flutter_hackathon/screens/arvr/panorama_view.dart';
 import 'package:flutter_hackathon/screens/arvr/products_list_screen.dart';
 import 'package:flutter_hackathon/screens/home_screen.dart';
 import 'package:flutter_hackathon/screens/my_events_screen.dart';
@@ -98,7 +99,15 @@ class _MainPageState extends State<MainPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).pushNamed('/cp');
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (ctx) => PanoramaPage(
+                      images: [
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/1.jpg?alt=media&token=50bef1d0-a0db-493c-8900-58335b50b122',
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/2.jpg?alt=media&token=03e5406c-6b10-4d24-a7af-d03484ba6691',
+                        'https://firebasestorage.googleapis.com/v0/b/apnaghar-ef0ca.appspot.com/o/3.jpg?alt=media&token=02c63c67-a914-44fa-a3a5-d925450b39a0'
+                      ],
+                      labels: ['Entrance', 'Point 1', 'Point 2'],
+                    )));
           },
           backgroundColor: MyColors.primaryColor,
           child: SvgPicture.asset(
@@ -164,207 +173,5 @@ class _MainPageState extends State<MainPage> {
           ],
           // ),
         ));
-
-    return AdvancedDrawer(
-      backdrop: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.white, Colors.grey.withOpacity(0.2)],
-          ),
-        ),
-      ),
-      controller: _advancedDrawerController,
-      animationCurve: Curves.easeInOut,
-      animationDuration: const Duration(milliseconds: 300),
-      animateChildDecoration: true,
-      rtlOpening: false,
-      // openScale: 1.0,
-      disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        // NOTICE: Uncomment if you want to add shadow behind the page.
-        // Keep in mind that it may cause animation jerks.
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 0.0,
-          ),
-        ],
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-      ),
-      drawer: SafeArea(
-        child: Container(
-          child: ListTileTheme(
-            textColor: Colors.black,
-            iconColor: Colors.black,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 128.0,
-                  height: 128.0,
-                  margin: const EdgeInsets.only(
-                    top: 24.0,
-                    bottom: 64.0,
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    shape: BoxShape.circle,
-                  ),
-                  child: SvgPicture.asset(
-                    'assets/images/logo.svg',
-                    height: 30,
-                  ),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(Icons.person_outline),
-                  title: Text('My Profile'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: SvgPicture.asset(
-                    'assets/images/nav1.svg',
-                    height: 22,
-                    width: 22,
-                    color: Colors.black,
-                  ),
-                  title: Text('Explore'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: SvgPicture.asset(
-                    'assets/images/nav2.svg',
-                    height: 22,
-                    width: 22,
-                    color: Colors.black,
-                  ),
-                  title: Text('Events'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: SvgPicture.asset(
-                    'assets/images/nav3.svg',
-                    height: 22,
-                    width: 22,
-                    color: Colors.black,
-                  ),
-                  title: Text('Map'),
-                ),
-                ListTile(
-                  onTap: () {},
-                  leading: Icon(Icons.logout),
-                  title: Text('Sign Out'),
-                ),
-                Spacer(),
-                DefaultTextStyle(
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white54,
-                  ),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 16.0,
-                    ),
-                    child: Text('Terms of Service | Privacy Policy'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      child: Scaffold(
-          backgroundColor: MyColors.gray3,
-          body: PageView(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              HomeScreen(),
-              TabBarPage(),
-              WebViewExample(),
-              ProfileScreen(),
-            ],
-            onPageChanged: (idx) {
-              setState(() {
-                _currentIndex = idx;
-              });
-            },
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed('/cp');
-            },
-            backgroundColor: MyColors.primaryColor,
-            child: SvgPicture.asset(
-              'assets/images/fab.svg',
-              height: 20,
-              width: 20,
-            ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: MyColors.white,
-            unselectedItemColor: MyColors.onPrimaryColor,
-            currentIndex: _currentIndex,
-            onTap: (int index) {
-              setState(() {
-                _currentIndex = index;
-                _pageController
-                    .jumpTo(_currentIndex * MediaQuery.of(context).size.width);
-              });
-            },
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: MyColors.primaryColor,
-            items: [
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 2.0),
-                  child: SvgPicture.asset(
-                    'assets/images/nav1.svg',
-                    color: _currentIndex == 0
-                        ? MyColors.primaryColor
-                        : MyColors.gray2,
-                  ),
-                ),
-                label: 'Explore',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/nav2.svg',
-                  color: _currentIndex == 1
-                      ? MyColors.primaryColor
-                      : MyColors.gray2,
-                ),
-                label: 'Events',
-              ),
-              // BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/nav3.svg',
-                  color: _currentIndex == 2
-                      ? MyColors.primaryColor
-                      : MyColors.gray2,
-                ),
-                label: 'Map',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/nav4.svg',
-                  color: _currentIndex == 3
-                      ? MyColors.primaryColor
-                      : MyColors.gray2,
-                ),
-                label: 'Profile',
-              ),
-            ],
-            // ),
-          )),
-    );
   }
 }

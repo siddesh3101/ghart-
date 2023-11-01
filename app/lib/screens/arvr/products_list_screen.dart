@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_hackathon/constants/colors.dart';
 import 'package:flutter_hackathon/models/product_model.dart';
 import 'package:flutter_hackathon/screens/arvr/product_detail_screen.dart';
 
@@ -35,88 +36,105 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Furniture AR Viewer',
+          'AR Furniture',
           style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemCount: prods.length,
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      // TODO
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ProductDetailScreen(
-                                product: prods[index],
-                              )));
-                    },
-                    child: Card(
-                      elevation: 8,
-                      shadowColor: Colors.black45,
-                      margin: const EdgeInsets.all(6),
-                      shape: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(color: Colors.black26)),
-                      child: Padding(
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: prods.length == 0
+              ? CircularProgressIndicator()
+              : Column(
+                  children: [
+                    Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                                height: 110,
-                                width: 110,
-                                child:
-                                    Image.network(prods[index].imageUrl ?? '')
-                                // child: ModelViewer(
-                                //       src: '${prods[index]['modelUrl']}', // a bundled asset file
-                                //
-                                //   ),
+                        child: GridView.builder(
+                          scrollDirection: Axis.vertical,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.75,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 20),
+                          shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          itemCount: prods.length,
+                          itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              // TODO
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(
+                                        product: prods[index],
+                                      )));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color:
+                                      MyColors.primaryColor.withOpacity(0.08),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  children: [
+                                    AspectRatio(
+                                        aspectRatio: 1,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      prods[index]
+                                                          .imageUrl
+                                                          .toString()),
+                                                  fit: BoxFit.cover)),
+                                        )),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            prods[index].name.toString(),
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                color: MyColors.primaryColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            '\₹ ${prods[index].price.toString()}',
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                color: MyColors.blackColor,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                            const SizedBox(
-                              width: 10,
+                              ),
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${prods[index].name} \n',
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                                Text(
-                                  '',
-                                  style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                )),
-          ],
+                          ),
+                        )),
+                  ],
+                ),
         ),
       ),
     );
