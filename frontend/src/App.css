@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blue: #7065f0;
+  --black: #141413;
+  --lightblue: #7882db;
+  --grey: #989898;
+  --lightgrey: #f7f7fd;
+  --white: #fbfbff;
+
+  --primary: #1f3e72;
+  --secondary: rgba(255, 255, 255, 0.78);
+  --black: #131110;
+  --blue-gradient: linear-gradient(97.05deg, #4066ff 3.76%, #2949c6 100%);
+  --orange-gradient: linear-gradient(270deg, #ffb978 0%, #ff922d 100%);
+  --lightBlue: #eeeeff;
+  --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.25);
+}
+
+.wrapper {
+  background-color: white;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.paddings {
+  padding: 0 0 0 10%;
+}
+
+.innerWidth {
+  width: 100%;
+}
+
+.flexCenter {
+  display: flex;
+  row-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexColCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.flexColStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.flexColEnd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.primaryText {
+  color: #1f3e72;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.secondaryText {
+  color: var(--black);
+  font-size: 1.3rem;
+}
+.orangeText {
+  color: orange;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.white-gradient {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  background: #3c37cb1d;
+  filter: blur(100px);
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.faded {
+  position: relative;
+  display: inline-block;
+  color: white;
+}
+.faded:after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-collapse: separate;
+}
+.faded.faded-left:after {
+  box-shadow: inset 40px 0 40px -16px;
+}
+.faded.faded-right:after {
+  box-shadow: inset -40px 0 40px -16px;
+}
+.faded.faded-top:after {
+  box-shadow: inset 0 40px 40px -16px;
+}
+.faded.faded-bottom:after {
+  box-shadow: inset 0 -40px 40px -16px;
+}
+.faded.faded-left.faded-right:after {
+  box-shadow:
+    inset 40px 0 40px -16px,
+    inset -40px 0 40px -16px;
+}
+.faded.faded-left.faded-top:after {
+  box-shadow: inset 40px 40px 40px -16px;
+}
+.faded.faded-right.faded-bottom:after {
+  box-shadow: inset -40px -40px 40px -16px;
+}
+.faded.faded-top.faded-right:after {
+  box-shadow: inset -40px 40px 40px -16px;
+}
+.faded.faded-top.faded-bottom:after {
+  box-shadow:
+    inset 0 40px 40px -16px,
+    inset 0 -40px 40px -16px;
+}
+.faded.faded-left.faded-bottom:after {
+  box-shadow: inset 40px -40px 40px -16px;
+}
+.faded.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset -20px 0 40px 16px;
+}
+.faded.faded-left.faded-right.faded-bottom:after {
+  box-shadow: inset 0 -20px 40px 16px;
+}
+.faded.faded-left.faded-top.faded-bottom:after {
+  box-shadow: inset 20px 0 40px 16px;
+}
+.faded.faded-left.faded-top.faded-right:after {
+  box-shadow: inset 0 20px 40px 16px;
+}
+.faded.faded-all:after,
+.faded.faded-left.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset 0 0 40px 16px;
+}
+.faded.faded-narrow.faded-left:after {
+  box-shadow: inset 20px 0 20px -10px;
+}
+.faded.faded-narrow.faded-right:after {
+  box-shadow: inset -20px 0 20px -10px;
+}
+.faded.faded-narrow.faded-top:after {
+  box-shadow: inset 0 20px 20px -10px;
+}
+.faded.faded-narrow.faded-bottom:after {
+  box-shadow: inset 0 -20px 20px -10px;
+}
+.faded.faded-narrow.faded-left.faded-right:after {
+  box-shadow:
+    inset 20px 0 20px -10px,
+    inset -20px 0 20px -10px;
+}
+.faded.faded-narrow.faded-left.faded-top:after {
+  box-shadow: inset 20px 20px 20px -10px;
+}
+.faded.faded-narrow.faded-right.faded-bottom:after {
+  box-shadow: inset -20px -20px 20px -10px;
+}
+.faded.faded-narrow.faded-top.faded-right:after {
+  box-shadow: inset -20px 20px 20px -10px;
+}
+.faded.faded-narrow.faded-top.faded-bottom:after {
+  box-shadow:
+    inset 0 20px 20px -10px,
+    inset 0 -20px 20px -10px;
+}
+.faded.faded-narrow.faded-left.faded-bottom:after {
+  box-shadow: inset 20px -20px 20px -10px;
+}
+.faded.faded-narrow.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset -10px 0 20px 10px;
+}
+.faded.faded-narrow.faded-left.faded-right.faded-bottom:after {
+  box-shadow: inset 0 -10px 20px 10px;
+}
+.faded.faded-narrow.faded-left.faded-top.faded-bottom:after {
+  box-shadow: inset 10px 0 20px 10px;
+}
+.faded.faded-narrow.faded-left.faded-top.faded-right:after {
+  box-shadow: inset 0 10px 20px 10px;
+}
+.faded.faded-narrow.faded-all:after,
+.faded.faded-narrow.faded-left.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset 0 0 20px 10px;
+}
+.faded.faded-wide.faded-left:after {
+  box-shadow: inset 80px 0 80px -28px;
+}
+.faded.faded-wide.faded-right:after {
+  box-shadow: inset -80px 0 80px -28px;
+}
+.faded.faded-wide.faded-top:after {
+  box-shadow: inset 0 80px 80px -28px;
+}
+.faded.faded-wide.faded-bottom:after {
+  box-shadow: inset 0 -80px 80px -28px;
+}
+.faded.faded-wide.faded-left.faded-right:after {
+  box-shadow:
+    inset 80px 0 80px -28px,
+    inset -80px 0 80px -28px;
+}
+.faded.faded-wide.faded-left.faded-top:after {
+  box-shadow: inset 80px 80px 80px -28px;
+}
+.faded.faded-wide.faded-right.faded-bottom:after {
+  box-shadow: inset -80px -80px 80px -28px;
+}
+.faded.faded-wide.faded-top.faded-right:after {
+  box-shadow: inset -80px 80px 80px -28px;
+}
+.faded.faded-wide.faded-top.faded-bottom:after {
+  box-shadow:
+    inset 0 80px 80px -28px,
+    inset 0 -80px 80px -28px;
+}
+.faded.faded-wide.faded-left.faded-bottom:after {
+  box-shadow: inset 80px -80px 80px -28px;
+}
+.faded.faded-wide.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset -40px 0 80px 28px;
+}
+.faded.faded-wide.faded-left.faded-right.faded-bottom:after {
+  box-shadow: inset 0 -40px 80px 28px;
+}
+.faded.faded-wide.faded-left.faded-top.faded-bottom:after {
+  box-shadow: inset 40px 0 80px 28px;
+}
+.faded.faded-wide.faded-left.faded-top.faded-right:after {
+  box-shadow: inset 0 40px 80px 28px;
+}
+.faded.faded-wide.faded-all:after,
+.faded.faded-wide.faded-left.faded-top.faded-right.faded-bottom:after {
+  box-shadow: inset 0 0 80px 28px;
+}
+
+.panel {
+  background-color: blue;
+  padding: 1em;
+  color: white;
+}
+.panel .faded {
+  color: blue;
+}

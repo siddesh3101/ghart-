@@ -1,0 +1,107 @@
+.propertycard-wrapper {
+  background: white;
+  border-radius: 10px;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  padding: 0.7rem;
+  position: relative;
+}
+.propertycard-wrapper > .type-box {
+  border-radius: 20px;
+  position: absolute;
+  z-index: 3;
+  top: 25px;
+  left: 30px;
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))
+    drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+}
+.propertycard-wrapper > .rent {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.propertycard-wrapper > .buy {
+  color: var(--blue);
+  background-color: var(--white);
+}
+.propertycard-wrapper > img {
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.propertycard-content > .price {
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 1.7rem;
+  margin-bottom: 2px;
+}
+.propertycard-content > .name {
+  color: var(--black);
+  font-weight: 800;
+}
+.propertycard-content > .place {
+  color: var(--grey);
+  font-size: 0.8rem;
+}
+.propertycard-content > .feature-box-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 10px;
+}
+.propertycard-content > h2 > .rent-text {
+  color: var(--grey) !important;
+  font-size: 0.9rem;
+}
+.propertycard-content > h2 {
+  display: flex;
+  align-items: center;
+}
+.propertycard-content > .feature-box-wrapper > .feature-box {
+  background-color: #eeedfb;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  padding: 10px;
+  color: var(--blue);
+}
+.propertycard-line {
+  height: 1px;
+  background-color: var(--black);
+  opacity: 0.1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*landing page*/
+.slider1-header > h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.slider1-header > div {
+  background-color: #f1f0fe;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.categories-wrapper > .category {
+  background-color: lightgrey;
+  color: var(--black);
+  padding: 15px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.categories-wrapper > .selected-category {
+  background-color: var(--black) !important;
+  color: var(--white) !important;
+}

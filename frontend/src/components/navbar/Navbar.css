@@ -1,0 +1,161 @@
+.landing-navbar {
+  height: 12vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid rgba(201, 200, 200, 0.523);
+  padding: 0 2%;
+  background-color: var(--white);
+}
+
+.navbar-buttons > li:nth-child(2) {
+  margin-left: -0.8rem !important;
+}
+.navbar-selected {
+  color: var(--blue) !important;
+}
+.navbar-logo {
+  transform: scale(1.1);
+  margin-top: -10px;
+  cursor: pointer;
+}
+.navbar-logo img {
+  width: 8rem;
+  height: 6rem;
+  margin-left: -1rem;
+}
+.navbar-logo h1 {
+  margin-left: -2rem;
+  margin-top: 10px;
+}
+.navbar-menu {
+  margin-left: 1.2rem;
+}
+.navbar-menu ul {
+  display: flex;
+  padding: 0;
+  align-items: center;
+}
+.navbar-menu li {
+  list-style-type: none;
+  margin: 0 2rem;
+  text-align: center;
+}
+.navbar-menu li a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  color: var(--HMPGrey);
+  font-size: 1.15rem;
+}
+.navbar-menu li a:hover,
+.navbar-menu button:hover,
+button:hover,
+.navbar-logo {
+  transform: scale(1.04);
+  transition: 0.2s ease;
+}
+
+.navbar-menu button {
+  width: 6.4rem;
+  height: 3.1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 2px solid var(--lightblue) !important;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.hamburger {
+  border: 0;
+  height: 40px;
+  width: 40px;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: none;
+}
+.hamburger:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease;
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar-menu {
+    margin-left: 0;
+  }
+  .navbar-menu ul {
+    gap: 3rem;
+  }
+  .navbar-menu ul li {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .landing-navbar {
+    width: 100%;
+  }
+  .navbar-menu ul {
+    position: absolute;
+    right: -5%;
+    top: 0;
+    padding-top: 10vh;
+    flex-direction: column;
+    width: 70vw;
+    height: 100vh;
+    background-color: #fff;
+    margin: 0;
+  }
+  .navbar-menu ul li {
+    padding: 2rem;
+  }
+  .navbar-menu ul li a {
+    font-size: 1.5rem;
+  }
+  .hamburger {
+    display: block;
+  }
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+  .navbar-menu {
+    animation-name: fade;
+    animation-duration: 2s;
+  }
+  .navbar-menu.expanded ul {
+    opacity: 1;
+    transition: opacity 1s;
+    display: block !important;
+  }
+  .navbar-menu ul {
+    opacity: 0;
+    display: none;
+  }
+  .navigation-menu li:hover {
+    transform: scale(1.1);
+    transition: 0.3 ease;
+  }
+}
