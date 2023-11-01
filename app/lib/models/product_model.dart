@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel {
@@ -5,11 +7,22 @@ class ProductModel {
   String? description;
   String? modelUrl;
   String? imageUrl;
-  ProductModel({this.name, this.description, this.modelUrl, this.imageUrl});
+  String? price;
+  String? rating;
+
+  ProductModel(
+      {this.name,
+      this.description,
+      this.modelUrl,
+      this.imageUrl,
+      this.price,
+      this.rating});
   ProductModel.fromMap(DocumentSnapshot data) {
     name = data['name'];
     description = data['description'];
     modelUrl = data['modelUrl'];
     imageUrl = data['imageUrl'];
+    price = data['price'];
+    rating = data['rating'];
   }
 }

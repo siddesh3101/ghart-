@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:flutter_hackathon/screens/arvr/ag_explore_screen.dart';
+import 'package:flutter_hackathon/screens/arvr/ag_home_screen.dart';
+import 'package:flutter_hackathon/screens/arvr/products_list_screen.dart';
 import 'package:flutter_hackathon/screens/home_screen.dart';
 import 'package:flutter_hackathon/screens/my_events_screen.dart';
 import 'package:flutter_hackathon/screens/profile_screen.dart';
@@ -82,9 +85,9 @@ class _MainPageState extends State<MainPage> {
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            HomeScreen(),
-            TabBarPage(),
-            WebViewExample(),
+            AGHomeScreen(),
+            AGExploreMapScreen(),
+            ProductListScreen(),
             ProfileScreen(),
           ],
           onPageChanged: (idx) {
@@ -123,30 +126,32 @@ class _MainPageState extends State<MainPage> {
               icon: Padding(
                 padding: const EdgeInsets.only(bottom: 2.0),
                 child: SvgPicture.asset(
-                  'assets/images/nav1.svg',
+                  'assets/home.svg',
                   color: _currentIndex == 0
                       ? MyColors.primaryColor
                       : MyColors.gray2,
                 ),
               ),
-              label: 'Explore',
+              label: 'Home',
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/images/nav2.svg',
-                color:
-                    _currentIndex == 1 ? MyColors.primaryColor : MyColors.gray2,
-              ),
-              label: 'Events',
-            ),
-            // BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 'assets/images/nav3.svg',
                 color:
-                    _currentIndex == 2 ? MyColors.primaryColor : MyColors.gray2,
+                    _currentIndex == 1 ? MyColors.primaryColor : MyColors.gray2,
               ),
               label: 'Map',
+            ),
+            // BottomNavigationBarItem(icon: Icon(Icons.add), label: ""),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/ar.svg',
+                height: 24,
+                width: 24,
+                color:
+                    _currentIndex == 2 ? MyColors.primaryColor : MyColors.gray2,
+              ),
+              label: 'AR',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(

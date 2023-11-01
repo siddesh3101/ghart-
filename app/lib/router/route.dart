@@ -23,8 +23,9 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/notification': (context) => NotificationScreen(),
   '/cp': (p0) => CreatePetition(),
   '/arfurniture': (p0) => ProductListScreen(),
+  '/home': (p0) => MainPage(),
 
   // '/ob': (context) => OnboaardingScreen()
 };
 
-String initRoute = '/arfurniture';
+String initRoute = '/home';
