@@ -21,6 +21,7 @@ export function PropertyContextProvider({ children }) {
     const data = await axios.get(url);
     if (data) {
       const store = data?.data;
+      console.log(store);
       dispatch({
         type: "LOAD",
         payload: {

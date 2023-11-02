@@ -1,6 +1,6 @@
 import React from "react";
 import { OpenAI } from "openai";
-
+import maskImage from "../../assets/m2.png";
 function Design() {
   const [uploadedImage, setUploadedImage] = React.useState(null);
   const [outputImage, setOutputImage] = React.useState(null);
@@ -16,17 +16,18 @@ function Design() {
 
   const handleGenerate = async () => {
     setLoading(true);
-    prompt = "Change the wall color in the image to blue color.";
+    const t = "add sofa on floor to make it a living room.";
 
     try {
       console.log(uploadedImage);
       const response = await openai.images.edit({
         image: uploadedImage,
-        prompt: prompt,
-        size: "512x512",
-        model: "image-alpha-001",
+        mask: maskImage,
+        prompt: t,
+        size: "1024x1024",
         n: 1,
       });
+      console.log(response.data);
       console.log(response["data"][0]["url"]);
       setOutputImage(response["data"][0]["url"]);
       setLoading(false);

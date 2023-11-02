@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Document</title>
+    <title>Apna Ghar</title>
     <style>
       html,
       body {
@@ -14,154 +14,184 @@
       .container {
         height: 100%;
         position: relative;
+        display: flex;
       }
 
-      input {
-        font-size: 12px;
+      #map {
+        flex: 1;
+      }
+
+      .options-box {
+        position: absolute;
+        z-index: 10;
+        width: 330px;
+        padding: 10px;
+        left: 10px;
+        top: 10px;
+        border-radius: 30px;
+        background: #f7f7fd;
+        /* height: 92.5vh; */
+        /* border: 1px solid #999; */
+        text-align: left;
+        padding: 2% 1%;
+        filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03))
+          drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
       }
 
       h1 {
-        color: #525454;
-        font-size: 22px;
-        margin: 0 0 10px 0;
+        color: #7065f0;
+        font-size: 24px;
+        /* margin: 0 0 20px; */
         text-align: center;
-      }
-
-      #hide-listings,
-      #show-listings {
-        width: 48%;
       }
 
       hr {
         background: #d0d7d9;
         height: 1px;
-        margin: 20px 0 20px 0;
+        margin: 20px 0;
         border: none;
       }
 
-      #map {
-        bottom: 0px;
-        height: 100%;
-        left: 362px;
-        position: absolute;
-        right: 0px;
-      }
-
-      .options-box {
-        background: #fff;
-        border: 1px solid #999;
-        border-radius: 3px;
-        height: 100%;
-        line-height: 35px;
-        padding: 10px 10px 30px 10px;
-        text-align: left;
-        width: 340px;
-      }
-      .info-heading {
-        font-size: 18px;
+      .text-bold {
         font-weight: bold;
-        margin-top: 10px;
       }
 
-      .info-text {
-        font-size: 16px;
-        margin-top: 5px;
-      }
-
-      .info-link {
-        margin-top: 10px;
-      }
-
-      .info-button {
-        display: inline-block;
-        padding: 5px 10px;
-        background-color: #0091ff;
+      input[type="button"] {
+        background-color: #7065f0;
         color: #fff;
-        text-decoration: none;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
       }
 
-      .info-button:hover {
-        background-color: #007acc;
+      input[type="button"]:hover {
+        background-color: rgb(121, 131, 229);
       }
-
-      #pano {
-        width: 200px;
-        height: 200px;
+      select {
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: 1px solid #7065f0;
+        text-align: left;
       }
-
-      #search-within-time-text {
-        width: 84%;
-      }
-
-      .text {
-        font-size: 12px;
-      }
-
-      #toggle-drawing {
-        width: 27%;
-        position: relative;
-        margin-left: 10px;
-      }
-
-      #zoom-to-area-text {
-        width: 70%;
-      }
-
-      #zoom-to-area {
-        width: 24%;
+      @media screen and (max-width: 768px) {
+        .options-box {
+          height: auto;
+        }
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <div class="options-box">
-        <h1>Apna Ghar</h1>
+        <!-- <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(1.4);
+            margin-left: -20px;
+          "
+        >
+          <img src="logo.png" style="width: 100px; height: 80px" />
+          <h1
+            style="
+              color: black;
+              font-size: 0.8rem;
+              margin-left: -1.6rem;
+              margin-top: 1.35em;
+            "
+          >
+            APNA GHAR MAPS
+          </h1>
+        </div> -->
+        <!-- <hr /> -->
         <div>
-          <input id="show-listings" type="button" value="Show Listings" />
-          <input id="hide-listings" type="button" value="Hide Listings" />
-          <hr />
-          <span class="text-bold">ploygon</span>
-          <input id="toggle-drawing" type="button" value="Drawing Tools" />
-        </div>
-        <hr />
-        <div>
-          <span class="text-bold">Search Homes</span>
+          <h3 class="text-bold">Search for your Favourite Areas</h3>
           <input
             id="zoom-to-area-text"
             type="text"
-            placeholder="Enter your favorite area!"
+            placeholder="Search for your favourite areas"
+            style="
+              padding: 10px 20px;
+              border-radius: 10px;
+              border: 1px solid #7065f0;
+              width: 200px;
+              margin-right: 10px;
+            "
           />
           <input id="zoom-to-area" type="button" value="Find" />
         </div>
         <hr />
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 2%;
+          "
+        >
+          <span class="text-bold">Draw Polygons</span>
+          <input id="toggle-drawing" type="button" value="Draw" />
+        </div>
+
+        <hr />
         <div>
-          <span class="text-bold">Find Homes near to station</span><br />
-          <span class="text"> Within </span>
-          <select id="max-duration">
+          <h3 class="text-bold">Find Homes near the station</h3>
+          <span class="text">Time</span>
+          <select
+            id="max-duration"
+            style="margin-right: 20px; margin-left: 20px"
+          >
             <option value="10">10 min</option>
             <option value="15">15 min</option>
             <option value="30">30 min</option>
             <option value="60">1 hour</option>
           </select>
-          <select id="mode">
-            <option value="DRIVING">drive</option>
-            <option value="WALKING">walk</option>
-            <option value="BICYCLING">bike</option>
-            <option value="TRANSIT">transit ride</option>
+          <select id="mode" style="margin-bottom: 20px">
+            <option value="DRIVING">Drive</option>
+            <option value="WALKING">Walk</option>
+            <option value="BICYCLING">Bike</option>
+            <option value="TRANSIT">Transit Ride</option>
           </select>
-          <span class="text">of</span>
-          <input id="search-within-time-text" type="text" />
+          <br />
+          <span class="text">Place</span>
+          <input
+            id="search-within-time-text"
+            type="text"
+            style="
+              padding: 10px 20px;
+              border-radius: 10px;
+              border: 1px solid #7065f0;
+              width: 140px;
+              margin-left: 20px;
+              margin-right: 15px;
+            "
+          />
           <input id="search-within-time" type="button" value="Go" />
         </div>
         <hr />
         <div class="lists">
           <ol id="ol-lists"></ol>
         </div>
+        <div
+          style="
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 12%;
+          "
+        >
+          <input id="show-listings" type="button" value="Show Listings" />
+          <input id="hide-listings" type="button" value="Hide Listings" />
+        </div>
       </div>
       <div id="map"></div>
     </div>
+
     <script>
       var map;
 
@@ -370,7 +400,7 @@
         });
 
         // Style the markers a bit. This will be our listing marker icon.
-        var defaultIcon = makeMarkerIcon("0091ff");
+        var defaultIcon = makeMarkerIcon("7065f0");
 
         // Create a "highlighted location" marker color for when the user
         // mouses over the marker.

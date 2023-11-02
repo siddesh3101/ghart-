@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Hero from "../../components/Landing/Hero/Hero";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -25,6 +25,7 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
     {
       image: house1,
@@ -33,6 +34,7 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
     {
       image: house1,
@@ -41,6 +43,7 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
     {
       image: house1,
@@ -49,6 +52,7 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
     {
       image: house1,
@@ -57,6 +61,7 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
     {
       image: house1,
@@ -65,14 +70,17 @@ function Slider1() {
       place: "San Fransisco",
       price: "$90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
+      id: "",
     },
   ];
+
   return (
     <div className="pl-44 mt-24">
       <div className="flex justify-between align-center mr-24 my-12 slider1-header">
         <h1 className="">Latest Properties</h1>
         <div className="next-button">{">"}</div>
       </div>
+
       <Swiper
         spaceBetween={50}
         slidesPerView={3.5}
@@ -94,6 +102,7 @@ function Slider1() {
 }
 
 function FindCategory() {
+  const { data } = usePropertyContext();
   const categoriesData = [
     "Resedential",
     "Commerical",
@@ -195,7 +204,7 @@ function FindCategory() {
       <h1 className="font-bold text-4xl mb-4">Find the category for you</h1>
       <p className="text-[#989898]">Loreum Ipsum</p>
       <div className="categories-wrapper flex justify-center align-center gap-4 bg-white rounded-3xl drop-shadow-2xl my-16 p-4">
-        {categoriesData.map((category, index) => {
+        {categoriesData?.map((category, index) => {
           return (
             <div
               className={
@@ -212,7 +221,7 @@ function FindCategory() {
         })}
       </div>
       <div className="category-properties-wrapper flex justify-center align-center gap-4 flex-wrap px-32">
-        {propertiesData.map((property, index) => {
+        {data?.data.map((property, index) => {
           if (property.category == categoriesData[selectedCategory]) {
             return <PropertyCard {...property} style={{ width: "30%" }} />;
           }

@@ -1,12 +1,32 @@
 import React from "react";
 import "./PropertyCard.css";
-function PropertyCard({ image, type, name, place, price, features, style }) {
+import { useNavigate } from "react-router-dom";
+function PropertyCard({
+  image,
+  type,
+  name,
+  place,
+  price,
+  features,
+  style,
+  imageStyle,
+  id,
+}) {
+  type = type.toLowerCase();
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate(`/property/${id}`);
+  };
   return (
-    <div className="propertycard-wrapper" style={style}>
+    <div
+      className="propertycard-wrapper cursor-pointer"
+      style={style}
+      onClick={handleNavigate}
+    >
       <div className={type == "rent" ? "type-box rent" : "type-box buy"}>
         {type == "rent" ? "For rent" : "For sale"}
       </div>
-      <img src={image} className />
+      <img src={image} style={imageStyle} />
       <div className="px-4 propertycard-content">
         <h2 className="price">
           {price}{" "}

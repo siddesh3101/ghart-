@@ -6,7 +6,9 @@ import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import Login from "./pages/Login";
+import { useAuthContext } from "./hooks/useAuthContext";
 function App() {
+  const { user } = useAuthContext();
   return (
     <div className="App">
       <Routes>

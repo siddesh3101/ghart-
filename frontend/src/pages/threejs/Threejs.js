@@ -4,9 +4,9 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "@react-three/drei";
 import { PlaneGeometry } from "three";
 import { useThree } from "@react-three/fiber";
-
+import model from "../../assets/models/asia_building.glb";
 function Threejs() {
-  const gltf = useLoader(GLTFLoader, "models/asia_building.glb");
+  const gltf = useLoader(GLTFLoader, model);
   gltf.scene.parent = null;
   const { gl } = useThree(); // Access the Three.js renderer
 

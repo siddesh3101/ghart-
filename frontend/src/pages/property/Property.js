@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import house from "../../assets/house1.jpg";
@@ -13,8 +13,25 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Maps from "../../components/Maps";
 import GoogleMapReact from "google-map-react";
-
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import Threejs from "../threejs/Threejs";
+import { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 function Property() {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [data, setData] = React.useState(null);
+  async function getData() {
+    const res = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getProperty/${id}`
+    );
+    console.log(res.data[0]);
+    setData(res.data[0]);
+  }
+  useEffect(() => {
+    getData();
+  }, []);
   const propertyData = {
     name: "Sample Property",
     address: "123 Main Street",
@@ -65,15 +82,16 @@ function Property() {
       name: "Browse nearby listings",
     },
   ];
+  const navigate = useNavigate();
 
   return (
     <>
       <div className="property-wrapper px-32 flex flex-col gap-8">
         <div>
-          <h1 className="font-bold text-3xl mt-12">{propertyData.name}</h1>
+          <h1 className="font-bold text-3xl mt-12">{data?.name}</h1>
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-[#787e8e]">{propertyData.address}</p>
+          <p className="text-[#787e8e]">{data?.address}</p>
           <div className="flex justify-center items-center gap-8">
             {headerOptions.map((option, index) => {
               return (
@@ -89,7 +107,7 @@ function Property() {
             })}
           </div>
         </div>
-        <div className="flex items-center gap-8">
+        <div className="flex  gap-8">
           <div className="images-wrapper w-[72.5%]">
             <Swiper
               spaceBetween={30}
@@ -100,7 +118,7 @@ function Property() {
               autoplay={{ delay: 2500, disableOnInteraction: false }}
               loop={true}
             >
-              {propertyData.images.map((img) => {
+              {data?.images.map((img) => {
                 return (
                   <SwiperSlide>
                     <div style={{ width: "100%", height: "40%" }}>
@@ -114,14 +132,33 @@ function Property() {
               })}
             </Swiper>
           </div>
-          <div
-            className="property-maps-wrapper border-gray border-2 border-solid rounded-xl"
-            style={{ width: "100%", height: "85vh" }}
-          >
-            <Maps />
+          <div style={{ width: "100%" }}>
+            <div
+              className="property-maps-wrapper border-gray border-2 border-solid rounded-xl"
+              style={{ width: "100%", height: "45vh" }}
+            >
+              <Maps lat={data?.latitude} lng={data?.longitude} />
+            </div>
+            <div className="mt-12 relative">
+              <div
+                className="bg-blue-color absolute right-2 bottom-2	 z-10 cursor-pointer text-white p-2 rounded-xl"
+                onClick={() => {
+                  navigate(`/3D?view=${data?.matterPortLink}`);
+                }}
+              >
+                View in 3D
+              </div>
+              <Canvas
+                style={{ height: "34vh", borderRadius: "10px", width: "100%" }}
+              >
+                <Suspense fallback={null}>
+                  <Threejs />
+                </Suspense>
+              </Canvas>
+            </div>
           </div>
         </div>
-        <div className="content-wrapper flex gap-8">
+        <div className="property-content-wrapper flex gap-8">
           <div className="lhs-content  w-[92%] flex flex-col gap-8">
             <div className="flex justify-between border-gray border-2 border-solid p-8 rounded-xl">
               <div>
@@ -130,7 +167,7 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {propertyData.bedroom}
+                  {data?.bedroom}
                 </p>
               </div>
               <div>
@@ -139,7 +176,7 @@ function Property() {
                   <BiBath
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {propertyData.bathroom}
+                  {data?.bathroom}
                 </p>{" "}
               </div>
               <div>
@@ -148,7 +185,7 @@ function Property() {
                   <TbSquareRotated
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {propertyData.squareArea}
+                  {data?.squareArea}
                 </p>{" "}
               </div>
               <div>
@@ -157,7 +194,7 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {propertyData.vastu}
+                  {data?.vastu}
                 </p>{" "}
               </div>
               <div>
@@ -166,13 +203,13 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {propertyData.status}
+                  {data?.status}
                 </p>{" "}
               </div>
             </div>
             <div>
               <h1 className="font-bold text-3xl mb-4">About this home</h1>
-              <p className="text-[#787e8e]">{propertyData.description}</p>
+              <p className="text-[#787e8e]">{data?.description}</p>
             </div>
             <div className="border-solid border-2 border-[#e0def7] p-8 rounded-xl bg-[#f3f3f9]">
               <p className="mb-4 text-[#787e8e]">Listed by</p>
@@ -190,7 +227,7 @@ function Property() {
                     }}
                   >
                     <img
-                      src={propertyData.sellerPic}
+                      src={propertyData?.sellerPic}
                       alt="seller photo"
                       width={"100%"}
                       height={"100%"}
@@ -198,7 +235,7 @@ function Property() {
                     />
                   </div>
                   <div className="block">
-                    <h3 className="font-bold">{propertyData.sellerName}</h3>
+                    <h3 className="font-bold">{data?.sellerName}</h3>
                     <p className="text-sm text-[#787e8e]">
                       Rich Captial Properties LTD
                     </p>
@@ -233,11 +270,15 @@ function Property() {
             <div className="flex flex-col gap-4 border-gray border-2 border-solid p-8 rounded-xl">
               <div>
                 <p className="text-[#787e8e] text-sm">
-                  {propertyData.type === "rent" ? "Rent price" : "Buy price"}
+                  {propertyData.type.toLowerCase() === "rent"
+                    ? "Rent price"
+                    : "Buy price"}
                 </p>
                 <p className="text-blue-color text-2xl font-bold">
-                  {propertyData.price}
-                  {propertyData.type === "rent" && <span> "/month"</span>}
+                  {data?.price}
+                  {data?.type.toLowerCase() === "rent" && (
+                    <span className="text-[#787e8e] text-sm"> /month</span>
+                  )}
                 </p>
               </div>
               <button className="bg-blue-color px-8 py-3 text-white rounded-xl">
