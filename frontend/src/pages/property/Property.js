@@ -13,7 +13,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Maps from "../../components/Maps";
 import GoogleMapReact from "google-map-react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Threejs from "../threejs/Threejs";
 import { Suspense } from "react";
@@ -82,6 +82,7 @@ function Property() {
       name: "Browse nearby listings",
     },
   ];
+  const navigate = useNavigate();
 
   return (
     <>
@@ -138,7 +139,15 @@ function Property() {
             >
               <Maps lat={data?.latitude} lng={data?.longitude} />
             </div>
-            <div className="mt-12">
+            <div className="mt-12 relative">
+              <div
+                className="bg-blue-color absolute right-2 bottom-2	 z-10 cursor-pointer text-white p-2 rounded-xl"
+                onClick={() => {
+                  navigate(`/3D?view=${data?.matterPortLink}`);
+                }}
+              >
+                View in 3D
+              </div>
               <Canvas
                 style={{ height: "34vh", borderRadius: "10px", width: "100%" }}
               >
