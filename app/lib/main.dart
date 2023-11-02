@@ -3,8 +3,13 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hackathon/screens/arvr/products_list_screen.dart';
+import 'package:flutter_hackathon/screens/main_screen.dart';
+import 'package:flutter_hackathon/screens/profile_screen.dart';
+import 'package:flutter_hackathon/screens/splash_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
 
 import 'router/route.dart';
 import 'theme/app_theme.dart';
@@ -14,6 +19,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   NotificationSettings settings = await messaging.requestPermission(
@@ -57,12 +63,18 @@ class MyApp extends StatelessWidget {
       systemNavigationBarDividerColor: Colors.grey,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Apna Ghar',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
-      initialRoute: initRoute,
-      routes: routes,
+      routerConfig: GoRouter(routes: [
+        GoRoute(path: '/', builder: (context, state) => MainPage()),
+        GoRoute(
+            path: '/arfurniture',
+            builder: (context, state) => ProductListScreen()),
+        GoRoute(path: '/', builder: (context, state) => Splash()),
+        GoRoute(path: '/profile', builder: (context, state) => ProfileScreen()),
+      ]),
     );
   }
 }

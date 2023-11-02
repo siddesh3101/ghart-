@@ -63,6 +63,9 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   android_intent_plus: ^4.0.3
   panorama: ^0.4.1
+  app_links: ^3.4.5
+  uni_links: ^0.5.1
+  go_router: ^12.0.1
 
 dev_dependencies:
   flutter_test:
