@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPage> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             AGHomeScreen(),
-            AGExploreMapScreen(),
+            WebViewExample(url: 'https://apnaghar-maps.glitch.me/'),
             ProductListScreen(),
             ProfileScreen(),
           ],
