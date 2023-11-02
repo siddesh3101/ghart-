@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hackathon/screens/arvr/agent/upload_data_screen.dart';
 import 'package:flutter_hackathon/screens/arvr/products_list_screen.dart';
 import 'package:flutter_hackathon/screens/event_detail_screen.dart';
 import 'package:flutter_hackathon/screens/event_ticket_screen.dart';
@@ -23,7 +24,7 @@ Map<String, Widget Function(BuildContext)> routes = {
   '/notification': (context) => NotificationScreen(),
   '/cp': (p0) => CreatePetition(),
   '/arfurniture': (p0) => ProductListScreen(),
-  '/home': (p0) => MainPage(),
+  '/home': (p0) => RoomAds(),
 
   // '/ob': (context) => OnboaardingScreen()
 };
