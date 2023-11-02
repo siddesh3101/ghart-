@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import house from "../../assets/house1.jpg";
@@ -29,7 +29,7 @@ function Property() {
     console.log(res.data[0]);
     setData(res.data[0]);
   }
-  useLayoutEffect(() => {
+  useEffect(() => {
     getData();
   }, []);
   const propertyData = {
