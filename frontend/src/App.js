@@ -7,10 +7,13 @@ import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import Login from "./pages/Login";
 import { useAuthContext } from "./hooks/useAuthContext";
+import ScrollToTop from "./components/ScrollToTop";
 function App() {
   const { user } = useAuthContext();
   return (
     <div className="App">
+      <ScrollToTop />
+
       <Routes>
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/signup" element={<div>Signup</div>} />

@@ -18,10 +18,13 @@ import axios from "axios";
 import Threejs from "../threejs/Threejs";
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import { usePropertyContext } from "../../context/PropertiesContext";
+import PropertyCard from "../../components/PropertyCard";
 function Property() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const [data, setData] = React.useState(null);
+  const [pdata, setData] = React.useState(null);
+  const { data } = usePropertyContext();
   async function getData() {
     const res = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getProperty/${id}`
@@ -31,7 +34,10 @@ function Property() {
   }
   useEffect(() => {
     getData();
-  }, []);
+    return () => {
+      setData(null);
+    };
+  }, [location]);
   const propertyData = {
     name: "Sample Property",
     address: "123 Main Street",
@@ -88,10 +94,10 @@ function Property() {
     <>
       <div className="property-wrapper px-32 flex flex-col gap-8">
         <div>
-          <h1 className="font-bold text-3xl mt-12">{data?.name}</h1>
+          <h1 className="font-bold text-3xl mt-12">{pdata?.name}</h1>
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-[#787e8e]">{data?.address}</p>
+          <p className="text-[#787e8e]">{pdata?.address}</p>
           <div className="flex justify-center items-center gap-8">
             {headerOptions.map((option, index) => {
               return (
@@ -118,7 +124,7 @@ function Property() {
               autoplay={{ delay: 2500, disableOnInteraction: false }}
               loop={true}
             >
-              {data?.images.map((img) => {
+              {pdata?.images.map((img) => {
                 return (
                   <SwiperSlide>
                     <div style={{ width: "100%", height: "40%" }}>
@@ -137,13 +143,13 @@ function Property() {
               className="property-maps-wrapper border-gray border-2 border-solid rounded-xl"
               style={{ width: "100%", height: "45vh" }}
             >
-              <Maps lat={data?.latitude} lng={data?.longitude} />
+              <Maps lat={pdata?.latitude} lng={pdata?.longitude} />
             </div>
             <div className="mt-12 relative">
               <div
                 className="bg-blue-color absolute right-2 bottom-2	 z-10 cursor-pointer text-white p-2 rounded-xl"
                 onClick={() => {
-                  navigate(`/3D?view=${data?.matterPortLink}`);
+                  navigate(`/3D?view=${pdata?.matterPortLink}`);
                 }}
               >
                 View in 3D
@@ -167,7 +173,7 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {data?.bedroom}
+                  {pdata?.bedroom}
                 </p>
               </div>
               <div>
@@ -176,7 +182,7 @@ function Property() {
                   <BiBath
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {data?.bathroom}
+                  {pdata?.bathroom}
                 </p>{" "}
               </div>
               <div>
@@ -185,7 +191,7 @@ function Property() {
                   <TbSquareRotated
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {data?.squareArea}
+                  {pdata?.squareArea}
                 </p>{" "}
               </div>
               <div>
@@ -194,7 +200,7 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {data?.vastu}
+                  {pdata?.vastu}
                 </p>{" "}
               </div>
               <div>
@@ -203,7 +209,7 @@ function Property() {
                   <LuBedSingle
                     style={{ width: "20px", height: "20px", color: "#787e8e" }}
                   />
-                  {data?.status}
+                  {pdata?.status}
                 </p>{" "}
               </div>
             </div>
@@ -275,8 +281,8 @@ function Property() {
                     : "Buy price"}
                 </p>
                 <p className="text-blue-color text-2xl font-bold">
-                  {data?.price}
-                  {data?.type.toLowerCase() === "rent" && (
+                  {pdata?.price}
+                  {pdata?.type.toLowerCase() === "rent" && (
                     <span className="text-[#787e8e] text-sm"> /month</span>
                   )}
                 </p>
@@ -333,6 +339,24 @@ function Property() {
       </div>
       <div className="bg-[#f7f7fd] px-32 py-12 mt-12">
         <h2 className="font-bold text-3xl mb-4">Similar Listings</h2>
+        <div className="flex flex-wrap">
+          {data?.data.map((d, index) => {
+            if (index < 3)
+              return (
+                <PropertyCard
+                  key={index}
+                  image={d?.images[0]}
+                  type={d?.type}
+                  name={d?.name}
+                  place={d?.address}
+                  price={d?.price}
+                  features={d?.amminities}
+                  id={d?._id}
+                  style={{ width: "30%", marginRight: "2rem" }}
+                />
+              );
+          })}
+        </div>
       </div>
     </>
   );

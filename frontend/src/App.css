@@ -272,3 +272,13 @@ a {
 .panel .faded {
   color: blue;
 }
+.input-designs {
+  border-top-color: white;
+  border-left-color: white;
+  border-right-color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.input-designs:focus .input-designs:active {
+  border: 1px solid var(--blue) !important;
+}

@@ -26,6 +26,7 @@ const SearchBar = ({ filter, setFilter }) => {
                   ? "text-blue-color cursor-pointer"
                   : "text-black  cursor-pointer"
               }`}
+              key={index}
               onClick={() => setSelectionOption(index)}
             >
               {option}

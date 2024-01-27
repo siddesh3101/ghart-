@@ -14,6 +14,7 @@ import Map from "./Map";
 function DefaultLayout() {
   const location = useLocation();
   const { user } = useAuthContext();
+
   return (
     <div>
       <Navbar />

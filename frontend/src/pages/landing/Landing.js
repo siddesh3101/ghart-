@@ -19,40 +19,43 @@ function Slider1() {
   const { data } = usePropertyContext();
   const Slider1Data = [
     {
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/edumate-5e68f.appspot.com/o/alexandra-gorn-JIUjvqe2ZHg-unsplash.jpg?alt=media&token=b90a4868-7fba-4a98-bb50-b211d917ff8e",
+      type: "sell",
+      name: "Seaside Senirirt",
+      place: "Nav Parichay Property",
+      price: "Rs300,000",
+      features: ["Swimming Pool", "Lift", "Gym"],
+      id: "65428b8ba207442e46d4c747",
+    },
+    {
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/edumate-5e68f.appspot.com/o/christopher-jolly-GqbU78bdJFM-unsplash.jpg?alt=media&token=5cf59f37-c675-4134-85e8-c9c491ae4f4f",
+      type: "buy",
+      name: "Pullu Property",
+      place: "Nit raipur Street",
+      price: "Rs800,000",
+      features: ["Swimming Pool", "Lift", "Gym"],
+      id: "65428c5da207442e46d4c74a",
+    },
+    {
       image: house1,
       type: "rent",
       name: "Seaside Senirirt",
       place: "San Fransisco",
-      price: "$90 000",
+      price: "Rs90 000",
       features: ["2 beds", "2 baths", "1200 sqft"],
       id: "",
     },
     {
-      image: house1,
-      type: "buy",
-      name: "Seaside Senirirt",
-      place: "San Fransisco",
-      price: "$90 000",
-      features: ["2 beds", "2 baths", "1200 sqft"],
-      id: "",
-    },
-    {
-      image: house1,
-      type: "buy",
-      name: "Seaside Senirirt",
-      place: "San Fransisco",
-      price: "$90 000",
-      features: ["2 beds", "2 baths", "1200 sqft"],
-      id: "",
-    },
-    {
-      image: house1,
-      type: "buy",
-      name: "Seaside Senirirt",
-      place: "San Fransisco",
-      price: "$90 000",
-      features: ["2 beds", "2 baths", "1200 sqft"],
-      id: "",
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/edumate-5e68f.appspot.com/o/360_F_287986158_2Tz2w7QKcgmbpecZZzveGUdN9RNPB3c4.jpg?alt=media&token=69370af1-87db-4e0f-b5ab-c9e14470220b",
+      type: "rent",
+      name: "Shivam Property",
+      place: "Nit raipur Street",
+      price: "Rs800,000",
+      features: ["Swimming Pool", "Lift", "Gym"],
+      id: "6542a0c09aa7422e09058df5",
     },
     {
       image: house1,
@@ -91,7 +94,7 @@ function Slider1() {
       >
         {Slider1Data.map((item, index) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <PropertyCard {...item} />
             </SwiperSlide>
           );
@@ -221,7 +224,7 @@ function FindCategory() {
         })}
       </div>
       <div className="category-properties-wrapper flex justify-center align-center gap-4 flex-wrap px-32">
-        {data?.data.map((property, index) => {
+        {propertiesData.map((property, index) => {
           if (property.category == categoriesData[selectedCategory]) {
             return <PropertyCard {...property} style={{ width: "30%" }} />;
           }
