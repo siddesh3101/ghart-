@@ -45,7 +45,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: prods.length == 0
-              ? CircularProgressIndicator()
+              ? Center(child: CircularProgressIndicator())
               : Column(
                   children: [
                     Padding(
